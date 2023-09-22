@@ -1,7 +1,7 @@
 <template>
   <div class="login-form-wrapper">
-    <div class="login-form-title">{{ $t('login.form.title') }}</div>
-    <div class="login-form-sub-title">{{ $t('login.form.title') }}</div>
+    <div class="login-form-title">{{ projectName }}</div>
+    <div class="login-form-sub-title">登录系统</div>
     <div class="login-form-error-msg">{{ errorMessage }}</div>
     <a-form
       ref="loginForm"
@@ -16,10 +16,7 @@
         :validate-trigger="['change', 'blur']"
         hide-label
       >
-        <a-input
-          v-model="userInfo.username"
-          :placeholder="$t('login.form.userName.placeholder')"
-        >
+        <a-input v-model="userInfo.username" placeholder="用户名">
           <template #prefix>
             <icon-user />
           </template>
@@ -33,7 +30,7 @@
       >
         <a-input-password
           v-model="userInfo.password"
-          :placeholder="$t('login.form.password.placeholder')"
+          placeholder="密码"
           allow-clear
         >
           <template #prefix>
@@ -50,14 +47,14 @@
           >
             {{ $t('login.form.rememberPassword') }}
           </a-checkbox>
-          <a-link>{{ $t('login.form.forgetPassword') }}</a-link>
+          <!--          <a-link>{{ $t('login.form.forgetPassword') }}</a-link>-->
         </div>
         <a-button type="primary" html-type="submit" long :loading="loading">
           {{ $t('login.form.login') }}
         </a-button>
-        <a-button type="text" long class="login-form-register-btn">
-          {{ $t('login.form.register') }}
-        </a-button>
+        <!--        <a-button type="text" long class="login-form-register-btn">-->
+        <!--          {{ $t('login.form.register') }}-->
+        <!--        </a-button>-->
       </a-space>
     </a-form>
   </div>
@@ -74,6 +71,7 @@
   import useLoading from '@/hooks/loading';
   import type { LoginData } from '@/api/user';
 
+  const projectName = import.meta.env.VITE_PROJECT_NAME;
   const router = useRouter();
   const { t } = useI18n();
   const errorMessage = ref('');
