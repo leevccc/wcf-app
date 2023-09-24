@@ -71,6 +71,7 @@ const getMessageList = () => {
 };
 
 setupMock({
+  mock: import.meta.env.VITE_DEV_MOCK === 'true',
   setup: () => {
     Mock.mock(new RegExp('/api/message/list'), () => {
       return successResponseWrap(getMessageList());

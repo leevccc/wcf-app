@@ -153,14 +153,14 @@
             <img alt="avatar" :src="avatar" />
           </a-avatar>
           <template #content>
-            <!--            <a-doption>-->
-            <!--              <a-space @click="switchRoles">-->
-            <!--                <icon-tag />-->
-            <!--                <span>-->
-            <!--                  {{ $t('messageBox.switchRoles') }}-->
-            <!--                </span>-->
-            <!--              </a-space>-->
-            <!--            </a-doption>-->
+            <a-doption v-if="isAdmin">
+              <a-space @click="switchRoles">
+                <icon-tag />
+                <span>
+                  {{ $t('messageBox.switchRoles') }}
+                </span>
+              </a-space>
+            </a-doption>
             <a-doption>
               <a-space @click="$router.push({ name: 'Info' })">
                 <icon-user />
@@ -212,6 +212,9 @@
   const locales = [...LOCALE_OPTIONS];
   const avatar = computed(() => {
     return userStore.avatar;
+  });
+  const isAdmin = computed(() => {
+    return userStore.isAdmin();
   });
   const theme = computed(() => {
     return appStore.theme;
