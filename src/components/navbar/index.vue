@@ -23,44 +23,6 @@
       <Menu v-if="topMenu" />
     </div>
     <ul class="right-side">
-      <!--      <li>-->
-      <!--        <a-tooltip :content="$t('settings.search')">-->
-      <!--          <a-button class="nav-btn" type="outline" :shape="'circle'">-->
-      <!--            <template #icon>-->
-      <!--              <icon-search />-->
-      <!--            </template>-->
-      <!--          </a-button>-->
-      <!--        </a-tooltip>-->
-      <!--      </li>-->
-      <!--      <li>-->
-      <!--        <a-tooltip :content="$t('settings.language')">-->
-      <!--          <a-button-->
-      <!--            class="nav-btn"-->
-      <!--            type="outline"-->
-      <!--            :shape="'circle'"-->
-      <!--            @click="setDropDownVisible"-->
-      <!--          >-->
-      <!--            <template #icon>-->
-      <!--              <icon-language />-->
-      <!--            </template>-->
-      <!--          </a-button>-->
-      <!--        </a-tooltip>-->
-      <!--        <a-dropdown trigger="click" @select="changeLocale as any">-->
-      <!--          <div ref="triggerBtn" class="trigger-btn"></div>-->
-      <!--          <template #content>-->
-      <!--            <a-doption-->
-      <!--              v-for="item in locales"-->
-      <!--              :key="item.value"-->
-      <!--              :value="item.value"-->
-      <!--            >-->
-      <!--              <template #icon>-->
-      <!--                <icon-check v-show="item.value === currentLocale" />-->
-      <!--              </template>-->
-      <!--              {{ item.label }}-->
-      <!--            </a-doption>-->
-      <!--          </template>-->
-      <!--        </a-dropdown>-->
-      <!--      </li>-->
       <li>
         <a-tooltip
           :content="
@@ -82,33 +44,6 @@
           </a-button>
         </a-tooltip>
       </li>
-      <!--      <li>-->
-      <!--        <a-tooltip :content="$t('settings.navbar.alerts')">-->
-      <!--          <div class="message-box-trigger">-->
-      <!--            <a-badge :count="9" dot>-->
-      <!--              <a-button-->
-      <!--                class="nav-b  tn"-->
-      <!--                type="outline"-->
-      <!--                :shape="'circle'"-->
-      <!--                @click="setPopoverVisible"-->
-      <!--              >-->
-      <!--                <icon-notification />-->
-      <!--              </a-button>-->
-      <!--            </a-badge>-->
-      <!--          </div>-->
-      <!--        </a-tooltip>-->
-      <!--        <a-popover-->
-      <!--          trigger="click"-->
-      <!--          :arrow-style="{ display: 'none' }"-->
-      <!--          :content-style="{ padding: 0, minWidth: '400px' }"-->
-      <!--          content-class="message-popover"-->
-      <!--        >-->
-      <!--          <div ref="refBtn" class="ref-btn"></div>-->
-      <!--          <template #content>-->
-      <!--            <message-box />-->
-      <!--          </template>-->
-      <!--        </a-popover>-->
-      <!--      </li>-->
       <li>
         <a-tooltip
           :content="
@@ -130,20 +65,6 @@
           </a-button>
         </a-tooltip>
       </li>
-      <!--      <li>-->
-      <!--        <a-tooltip :content="$t('settings.title')">-->
-      <!--          <a-button-->
-      <!--            class="nav-btn"-->
-      <!--            type="outline"-->
-      <!--            :shape="'circle'"-->
-      <!--            @click="setVisible"-->
-      <!--          >-->
-      <!--            <template #icon>-->
-      <!--              <icon-settings />-->
-      <!--            </template>-->
-      <!--          </a-button>-->
-      <!--        </a-tooltip>-->
-      <!--      </li>-->
       <li>
         <a-dropdown trigger="click">
           <a-avatar
@@ -193,23 +114,18 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, inject } from 'vue';
+  import { computed, inject } from 'vue';
   import { Message } from '@arco-design/web-vue';
   import { useDark, useToggle, useFullscreen } from '@vueuse/core';
   import { useAppStore, useUserStore } from '@/store';
-  import { LOCALE_OPTIONS } from '@/locale';
-  import useLocale from '@/hooks/locale';
   import useUser from '@/hooks/user';
   import Menu from '@/components/menu/index.vue';
-  import MessageBox from '../message-box/index.vue';
 
   const projectName = import.meta.env.VITE_PROJECT_NAME;
   const appStore = useAppStore();
   const userStore = useUserStore();
   const { logout } = useUser();
-  const { changeLocale, currentLocale } = useLocale();
   const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
-  const locales = [...LOCALE_OPTIONS];
   const avatar = computed(() => {
     return userStore.avatar;
   });
@@ -235,29 +151,8 @@
   const handleToggleTheme = () => {
     toggleTheme();
   };
-  const setVisible = () => {
-    appStore.updateSettings({ globalSettings: true });
-  };
-  const refBtn = ref();
-  const triggerBtn = ref();
-  const setPopoverVisible = () => {
-    const event = new MouseEvent('click', {
-      view: window,
-      bubbles: true,
-      cancelable: true,
-    });
-    refBtn.value.dispatchEvent(event);
-  };
   const handleLogout = () => {
     logout();
-  };
-  const setDropDownVisible = () => {
-    const event = new MouseEvent('click', {
-      view: window,
-      bubbles: true,
-      cancelable: true,
-    });
-    triggerBtn.value.dispatchEvent(event);
   };
   const switchRoles = async () => {
     const res = await userStore.switchRoles();

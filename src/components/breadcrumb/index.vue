@@ -3,23 +3,28 @@
     <a-breadcrumb-item>
       <icon-apps />
     </a-breadcrumb-item>
-    <a-breadcrumb-item v-for="item in items" :key="item">
-      {{ item }}
+    <a-breadcrumb-item
+      v-for="item in router.currentRoute.value.matched"
+      :key="item.name"
+    >
+      <a-link
+        v-if="
+          item.name !== router.currentRoute.value.name &&
+          item.children.length === 0
+        "
+        @click="$router.push({ name: item.name })"
+      >
+        {{ item.name }}
+      </a-link>
+      <span v-else>
+        {{ item.name }}
+      </span>
     </a-breadcrumb-item>
   </a-breadcrumb>
 </template>
 
 <script lang="ts" setup>
-  import { PropType } from 'vue';
-
-  defineProps({
-    items: {
-      type: Array as PropType<string[]>,
-      default() {
-        return [];
-      },
-    },
-  });
+  import router from '@/router';
 </script>
 
 <style scoped lang="less">

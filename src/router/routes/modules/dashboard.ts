@@ -31,6 +31,15 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'dormitory',
+      name: '宿舍管理',
+      component: () => import('@/views/dashboard/dormitory/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 

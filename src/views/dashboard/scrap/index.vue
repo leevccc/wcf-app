@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['废料数据']" />
+    <Breadcrumb />
     <a-card class="general-card" title="废料数据">
       <a-row style="margin-bottom: 16px">
         <a-col :span="12">
