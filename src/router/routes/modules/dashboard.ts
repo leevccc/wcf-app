@@ -3,7 +3,7 @@ import { AppRouteRecordRaw } from '../types';
 
 const DASHBOARD: AppRouteRecordRaw = {
   path: '/dashboard',
-  name: 'dashboard',
+  name: '仪表盘',
   component: DEFAULT_LAYOUT,
   meta: {
     locale: 'menu.dashboard',
@@ -24,10 +24,9 @@ const DASHBOARD: AppRouteRecordRaw = {
     },
     {
       path: 'scrap',
-      name: 'Scrap',
+      name: '废料数据',
       component: () => import('@/views/dashboard/scrap/index.vue'),
       meta: {
-        locale: '废料记录',
         requiresAuth: true,
         roles: ['*'],
       },
