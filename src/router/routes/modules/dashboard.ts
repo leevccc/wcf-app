@@ -22,6 +22,16 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'scrap',
+      name: 'Scrap',
+      component: () => import('@/views/dashboard/scrap/index.vue'),
+      meta: {
+        locale: '废料记录',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 
