@@ -19,11 +19,15 @@ RUN yarn build
 # 使用 Nginx 镜像作为运行时镜像
 FROM nginx:latest
 
+RUN  touch /var/run/nginx.pid && \
+     chown -R 1000:1000 /var/cache/nginx /var/run/nginx.pid
+USER 1000
+
 # 将构建好的静态文件复制到 Nginx 的默认文档根目录
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage --chown=1000:1000 /app/dist /usr/share/nginx/html
 
 # 复制自定义 Nginx 配置文件到容器中
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --chown=1000:1000 nginx.conf /etc/nginx/conf.d/default.conf
 
 # 暴露容器内的端口，Nginx 默认监听 80 端口
 EXPOSE 80

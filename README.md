@@ -22,5 +22,11 @@ docker build -t wcf-app .
 
 创建并运行容器
 ```shell
-docker run -d -p 80:80 wcf-app
+docker run -d \
+--name=wcf-app \
+--restart unless-stopped \
+-u 1000:1000 \
+-e TZ=Asia/ShangHai \
+-v /etc/localtime:/etc/localtime \
+wcf-app
 ```
