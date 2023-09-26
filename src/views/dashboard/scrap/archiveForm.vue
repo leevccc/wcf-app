@@ -38,7 +38,7 @@
   });
   const { loading, setLoading } = useLoading(true);
   const emit = defineEmits(['reloadData']);
-  const handleBeforeOk = async (done: () => void) => {
+  const handleBeforeOk = async () => {
     setLoading(true);
     try {
       await archiveScrap(form);
@@ -47,7 +47,6 @@
         content: '归档成功, 请在统计结果里查看数据',
         resetOnHover: true,
       });
-      done();
     } finally {
       setLoading(false);
     }

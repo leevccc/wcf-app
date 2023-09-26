@@ -12,11 +12,11 @@
               :show-file-list="false"
             >
               <template #upload-button>
-                <a-button type="primary"> 数据上传 </a-button>
+                <a-button type="primary">数据上传</a-button>
               </template>
             </a-upload>
-            <a-button @click="archiveClick"> 归档并统计 </a-button>
-            <a-button @click="scrapStatisticsClick"> 统计结果 </a-button>
+            <a-button @click="archiveClick">归档并统计</a-button>
+            <a-button @click="scrapStatisticsClick">统计结果</a-button>
           </a-space>
         </a-col>
       </a-row>
@@ -124,7 +124,7 @@
   };
   fetchData();
 
-  const summary = ({ columns, data }) => {
+  const summary = ({ columns, data }: { columns: any; data: any }) => {
     const countData = {
       weightKg: 0,
       totalPackage: 0,
@@ -159,7 +159,7 @@
     onError: any;
     onSuccess: any;
     fileItem: any;
-    name: any;
+    name?: any;
   }) => {
     const { onProgress, onError, onSuccess, fileItem, name } = option;
 
@@ -168,12 +168,17 @@
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     if (!isXLSX) {
       Message.error('只能上传 xlsx 文件');
-      return;
+      onError('只能上传 xlsx 文件');
+      return {
+        abort() {
+          xhr.abort();
+        },
+      };
     }
 
     const xhr = new XMLHttpRequest();
     if (xhr.upload) {
-      xhr.upload.onprogress = (event) => {
+      xhr.upload.onprogress = function (event) {
         let percent;
         if (event.total > 0) {
           // 0 ~ 1
@@ -182,6 +187,10 @@
         onProgress(percent, event);
       };
     }
+
+    xhr.onerror = function error(e) {
+      onError(e);
+    };
 
     xhr.onload = function onload() {
       if (xhr.status < 200 || xhr.status >= 300) {
@@ -195,7 +204,7 @@
         fetchData();
       }
 
-      return true;
+      onSuccess(xhr.response);
     };
 
     const formData = new FormData();
@@ -203,6 +212,12 @@
     xhr.open('post', `${import.meta.env.VITE_API_BASE_URL}/api/scrap`, true);
     xhr.setRequestHeader('Authorization', `Bearer ${getToken()}`);
     xhr.send(formData);
+
+    return {
+      abort() {
+        xhr.abort();
+      },
+    };
   };
 
   const archiveFormRef = ref<any>();
