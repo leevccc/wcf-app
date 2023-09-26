@@ -69,7 +69,7 @@
         </template>
       </a-table>
     </a-card>
-    <ArchiveForm ref="archiveFormRef" @reloadData="fetchData"></ArchiveForm>
+    <ArchiveForm ref="archiveFormRef" @reload-data="fetchData"></ArchiveForm>
     <ScrapStatistics ref="scrapStatisticsRef"></ScrapStatistics>
   </div>
 </template>
@@ -178,7 +178,7 @@
 
     const xhr = new XMLHttpRequest();
     if (xhr.upload) {
-      xhr.upload.onprogress = function (event) {
+      xhr.upload.onprogress = (event) => {
         let percent;
         if (event.total > 0) {
           // 0 ~ 1
@@ -192,6 +192,7 @@
       onError(e);
     };
 
+    // eslint-disable-next-line consistent-return
     xhr.onload = function onload() {
       if (xhr.status < 200 || xhr.status >= 300) {
         return onError(xhr.responseText);

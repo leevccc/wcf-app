@@ -9,16 +9,17 @@ export interface DormitoryState {
   deleted?: boolean;
 }
 
-export interface DormitoryRecord {
+export interface DormitoryRecordState {
   id?: number;
   dormitoryId?: number;
+  dormitory?: string;
   billDate?: string;
   date?: string;
   water?: number;
   electricity?: number;
 }
 
-export interface DormitoryOccupancy {
+export interface DormitoryOccupancyState {
   id?: number;
   userId?: number;
   dormitoryId?: number;
@@ -26,7 +27,7 @@ export interface DormitoryOccupancy {
   checkOutDate?: string;
 }
 
-export interface DormitoryExpense {
+export interface DormitoryExpenseState {
   id?: number;
   billMonth?: string;
   dormitoryId?: number;
@@ -44,7 +45,7 @@ export interface DormitoryExpense {
   totalCost?: number;
 }
 
-export interface DormitoryIndividualExpense {
+export interface DormitoryIndividualExpenseState {
   id?: number;
   billMonth?: string;
   dormitoryId?: number;
