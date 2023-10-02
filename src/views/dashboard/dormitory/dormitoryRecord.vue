@@ -3,7 +3,7 @@
     <a-row style="margin-bottom: 16px">
       <a-col :span="12">
         <a-space>
-          <a-button type="primary">新建</a-button>
+          <a-button type="primary" @click="newDataClick">新建</a-button>
         </a-space>
       </a-col>
     </a-row>
@@ -49,6 +49,10 @@
       </template>
     </a-table>
   </div>
+  <DormitoryRecordForm
+    ref="dormitoryRecordFormRef"
+    @reload="fetchData"
+  ></DormitoryRecordForm>
 </template>
 
 <script lang="ts" setup>
@@ -57,6 +61,7 @@
   import { ref } from 'vue';
   import { DormitoryRecordState } from '@/store/modules/dormitory/types';
   import { getDormitoryRecord } from '@/api/dormitory';
+  import DormitoryRecordForm from '@/views/dashboard/dormitory/dormitoryRecordForm.vue';
 
   const { loading, setLoading } = useLoading(true);
   const tableData = ref<DormitoryRecordState[]>([]);
@@ -74,6 +79,11 @@
     }
   };
   fetchData();
+
+  const dormitoryRecordFormRef = ref<any>();
+  const newDataClick = () => {
+    dormitoryRecordFormRef.value.initial();
+  };
 </script>
 
 <script lang="ts">

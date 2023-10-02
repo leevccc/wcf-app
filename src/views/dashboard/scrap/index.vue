@@ -69,7 +69,7 @@
         </template>
       </a-table>
     </a-card>
-    <ArchiveForm ref="archiveFormRef" @reload-data="fetchData"></ArchiveForm>
+    <ArchiveForm ref="archiveFormRef" @reload="fetchData"></ArchiveForm>
     <ScrapStatistics ref="scrapStatisticsRef"></ScrapStatistics>
   </div>
 </template>

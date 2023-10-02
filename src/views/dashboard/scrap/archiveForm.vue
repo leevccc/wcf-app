@@ -37,12 +37,12 @@
     unitPrice: 0,
   });
   const { loading, setLoading } = useLoading(true);
-  const emit = defineEmits(['reloadData']);
+  const emit = defineEmits(['reload']);
   const handleBeforeOk = async () => {
     setLoading(true);
     try {
       await archiveScrap(form);
-      emit('reloadData');
+      emit('reload');
       Message.success({
         content: '归档成功, 请在统计结果里查看数据',
         resetOnHover: true,

@@ -9,6 +9,11 @@ export interface DormitoryState {
   deleted?: boolean;
 }
 
+export interface DormitoryOptions {
+  id: number;
+  name: string;
+}
+
 export interface DormitoryRecordState {
   id?: number;
   dormitoryId?: number;
