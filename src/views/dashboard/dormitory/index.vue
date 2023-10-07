@@ -4,7 +4,7 @@
     <a-card class="general-card" title="宿舍管理">
       <a-tabs default-active-key="2" lazy-load @change="handleTabChange">
         <a-tab-pane key="1" title="宿舍列表">
-          Content of Tab Panel 1
+          <DormitoryList />
         </a-tab-pane>
         <a-tab-pane key="2" title="水电记录">
           <DormitoryRecord />
@@ -24,11 +24,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { DormitoryState } from '@/store/modules/dormitory/types';
-  import { ref } from 'vue';
   import DormitoryRecord from '@/views/dashboard/dormitory/dormitoryRecord.vue';
-
-  const dormitoryList = ref<DormitoryState[]>([]);
+  import DormitoryList from '@/views/dashboard/dormitory/DormitoryList.vue';
 
   const handleTabChange = (key: string | number) => {
     window.console.log('tabChange', key);
