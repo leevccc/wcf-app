@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  DormitoryOccupancyState,
   DormitoryRecordState,
   DormitoryState,
 } from '@/store/modules/dormitory/types';
@@ -18,11 +19,21 @@ export interface DormitoryRecordForm {
   water?: number;
   electricity?: number;
 }
+
+export interface DormitoryOccupancyForm {
+  userId?: number;
+  dormitoryId?: number;
+  checkInDate?: string;
+}
 export function getDormitory() {
   return axios.get<DormitoryState[]>('/api/dormitories');
 }
 export function getDormitoryRecord() {
   return axios.get<DormitoryRecordState[]>('/api/dormitory/record');
+}
+
+export function getDormitoryOccupancy() {
+  return axios.get<DormitoryOccupancyState[]>('/api/dormitory/occupancy');
 }
 
 export function postDormitory(data: DormitoryForm) {

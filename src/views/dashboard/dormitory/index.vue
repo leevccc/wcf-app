@@ -10,7 +10,7 @@
           <DormitoryRecord />
         </a-tab-pane>
         <a-tab-pane key="3" title="人员管理">
-          Content of Tab Panel 3
+          <DormitoryOccupancy />
         </a-tab-pane>
         <a-tab-pane key="4" title="宿舍费用">
           Content of Tab Panel 4
@@ -26,6 +26,7 @@
 <script lang="ts" setup>
   import DormitoryRecord from '@/views/dashboard/dormitory/dormitoryRecord.vue';
   import DormitoryList from '@/views/dashboard/dormitory/DormitoryList.vue';
+  import DormitoryOccupancy from '@/views/dashboard/dormitory/DormitoryOccupancy.vue';
 
   const handleTabChange = (key: string | number) => {
     window.console.log('tabChange', key);

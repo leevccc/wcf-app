@@ -27,7 +27,9 @@ export interface DormitoryRecordState {
 export interface DormitoryOccupancyState {
   id?: number;
   userId?: number;
+  user?: string;
   dormitoryId?: number;
+  roomNumber?: string;
   checkInDate?: string;
   checkOutDate?: string;
 }

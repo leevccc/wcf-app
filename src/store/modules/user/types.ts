@@ -5,6 +5,11 @@ export interface RoleState {
   name?: string;
 }
 
+export interface UserOptions {
+  id: number;
+  name: string;
+}
+
 export interface UserState {
   id?: number;
   username?: string;
