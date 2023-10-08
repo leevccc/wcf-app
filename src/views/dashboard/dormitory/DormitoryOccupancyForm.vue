@@ -40,7 +40,7 @@
   import {
     DormitoryOccupancyForm,
     getDormitory,
-    postDormitoryRecord,
+    postDormitoryOccupancy,
   } from '@/api/dormitory';
   import { Message } from '@arco-design/web-vue';
   import {
@@ -49,6 +49,7 @@
   } from '@/store/modules/dormitory/types';
   import { UserOptions } from '@/store/modules/user/types';
   import { getUserList } from '@/api/user';
+  import { isEmptyString } from '@/utils/string';
 
   const visible = ref(false);
   const { loading, setLoading } = useLoading(true);
@@ -61,6 +62,7 @@
   const dormitoryList = ref<DormitoryOptions[]>([]);
   const fetchDormitoryList = async () => {
     try {
+      dormitoryList.value = [];
       const { data } = await getDormitory();
       data.forEach((_data) => {
         if (!_data.id || !_data.roomNumber) return;
@@ -76,13 +78,14 @@
   const userList = ref<UserOptions[]>([]);
   const fetchUserList = async () => {
     try {
+      userList.value = [];
       const { data } = await getUserList();
-      const existingUserIdsWithCheckOut = dormitoryOccupancyList.value
-        .filter((_do) => _do.checkOutDate)
+      const occupancyUserIDList = dormitoryOccupancyList.value
+        .filter((_do) => isEmptyString(_do.checkOutDate))
         .map((_do) => _do.userId);
 
       const newUsers = data.filter(
-        (_user) => !existingUserIdsWithCheckOut.includes(_user.id)
+        (_user) => !occupancyUserIDList.includes(_user.id)
       );
 
       userList.value.push(
@@ -104,7 +107,7 @@
   const handleBeforeOk = async () => {
     setLoading(true);
     try {
-      await postDormitoryRecord(form);
+      await postDormitoryOccupancy(form);
       emit('reload');
       Message.success({
         content: '信息已登记',
@@ -115,13 +118,14 @@
     }
   };
 
-  const initial = () => {
+  const initial = (doList: DormitoryOccupancyState[]) => {
+    dormitoryOccupancyList.value = doList;
     fetchDormitoryList();
     fetchUserList();
     visible.value = true;
     setLoading(false);
   };
-  defineExpose({ initial, dormitoryOccupancyList });
+  defineExpose({ initial });
 </script>
 
 <script lang="ts">

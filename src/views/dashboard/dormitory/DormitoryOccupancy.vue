@@ -26,8 +26,8 @@
           :width="100"
         ></a-table-column>
         <a-table-column
-          title="宿舍ID"
-          data-index="roomNumber"
+          title="宿舍"
+          data-index="dormitory"
           :width="100"
         ></a-table-column>
         <a-table-column title="搬入" data-index="checkInDate" :width="120">
@@ -72,8 +72,7 @@
 
   const dormitoryOccupancyFormRef = ref<any>();
   const newDataClick = () => {
-    dormitoryOccupancyFormRef.value.dormitoryOccupancyList = tableData;
-    dormitoryOccupancyFormRef.value.initial();
+    dormitoryOccupancyFormRef.value.initial(tableData.value);
   };
 </script>
 

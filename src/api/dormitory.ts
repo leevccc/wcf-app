@@ -42,3 +42,7 @@ export function postDormitory(data: DormitoryForm) {
 export function postDormitoryRecord(data: DormitoryRecordForm) {
   return axios.post('/api/dormitory/record', data);
 }
+
+export function postDormitoryOccupancy(data: DormitoryOccupancyForm) {
+  return axios.post('/api/dormitory/occupancy', data);
+}

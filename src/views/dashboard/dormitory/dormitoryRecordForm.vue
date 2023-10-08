@@ -54,6 +54,7 @@
   const dormitoryList = ref<DormitoryOptions[]>([]);
   const fetchDormitoryList = async () => {
     try {
+      dormitoryList.value = [];
       const { data } = await getDormitory();
       data.forEach((_data) => {
         if (!_data.id || !_data.roomNumber) return;

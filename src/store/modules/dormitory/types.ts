@@ -29,7 +29,7 @@ export interface DormitoryOccupancyState {
   userId?: number;
   user?: string;
   dormitoryId?: number;
-  roomNumber?: string;
+  dormitory?: string;
   checkInDate?: string;
   checkOutDate?: string;
 }
