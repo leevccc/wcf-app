@@ -40,11 +40,26 @@
             {{ formatDate(record.checkOutDate) }}
           </template>
         </a-table-column>
-        <a-table-column title="操作"></a-table-column>
+        <a-table-column title="操作">
+          <template #cell="{ record }">
+            <a-button
+              v-if="isEmptyString(record.checkOutDate)"
+              type="primary"
+              size="small"
+              @click="checkOutClick(record)"
+            >
+              搬出
+            </a-button>
+          </template>
+        </a-table-column>
       </template>
     </a-table>
   </div>
   <DormitoryOccupancyForm ref="dormitoryOccupancyFormRef" @reload="fetchData" />
+  <d-occupancy-check-out-form
+    ref="dOccupancyCheckOutFormRef"
+    @reload="fetchData"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -53,7 +68,9 @@
   import useLoading from '@/hooks/loading';
   import { formatDate } from '@/utils/date';
   import { getDormitoryOccupancy } from '@/api/dormitory';
-  import DormitoryOccupancyForm from '@/views/dashboard/dormitory/DormitoryOccupancyForm.vue';
+  import DormitoryOccupancyForm from '@/views/dashboard/dormitory/occupancy/form.vue';
+  import DOccupancyCheckOutForm from '@/views/dashboard/dormitory/occupancy/checkOutForm.vue';
+  import { isEmptyString } from '@/utils/string';
 
   const { loading, setLoading } = useLoading(true);
   const tableData = ref<DormitoryOccupancyState[]>([]);
@@ -73,6 +90,11 @@
   const dormitoryOccupancyFormRef = ref<any>();
   const newDataClick = () => {
     dormitoryOccupancyFormRef.value.initial(tableData.value);
+  };
+
+  const dOccupancyCheckOutFormRef = ref<any>();
+  const checkOutClick = (data: any) => {
+    dOccupancyCheckOutFormRef.value.initial(data);
   };
 </script>
 

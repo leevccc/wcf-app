@@ -21,9 +21,13 @@ export interface DormitoryRecordForm {
 }
 
 export interface DormitoryOccupancyForm {
+  id?: number;
   userId?: number;
+  user?: string;
   dormitoryId?: number;
+  dormitory?: string;
   checkInDate?: string;
+  checkOutDate?: string;
 }
 export function getDormitory() {
   return axios.get<DormitoryState[]>('/api/dormitories');
@@ -45,4 +49,8 @@ export function postDormitoryRecord(data: DormitoryRecordForm) {
 
 export function postDormitoryOccupancy(data: DormitoryOccupancyForm) {
   return axios.post('/api/dormitory/occupancy', data);
+}
+
+export function putDormitoryOccupancy(data: DormitoryOccupancyForm) {
+  return axios.put(`/api/dormitory/occupancy/${data.id}`, data);
 }

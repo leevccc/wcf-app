@@ -2,7 +2,7 @@
   <div class="container">
     <Breadcrumb />
     <a-card class="general-card" title="宿舍管理">
-      <a-tabs default-active-key="2" lazy-load @change="handleTabChange">
+      <a-tabs default-active-key="2" lazy-load>
         <a-tab-pane key="1" title="宿舍列表">
           <DormitoryList />
         </a-tab-pane>
@@ -24,13 +24,9 @@
 </template>
 
 <script lang="ts" setup>
-  import DormitoryRecord from '@/views/dashboard/dormitory/dormitoryRecord.vue';
-  import DormitoryList from '@/views/dashboard/dormitory/DormitoryList.vue';
-  import DormitoryOccupancy from '@/views/dashboard/dormitory/DormitoryOccupancy.vue';
-
-  const handleTabChange = (key: string | number) => {
-    window.console.log('tabChange', key);
-  };
+  import DormitoryRecord from '@/views/dashboard/dormitory/record/index.vue';
+  import DormitoryList from '@/views/dashboard/dormitory/list/index.vue';
+  import DormitoryOccupancy from '@/views/dashboard/dormitory/occupancy/index.vue';
 </script>
 
 <script lang="ts">

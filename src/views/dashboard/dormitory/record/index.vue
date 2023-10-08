@@ -61,7 +61,7 @@
   import { ref } from 'vue';
   import { DormitoryRecordState } from '@/store/modules/dormitory/types';
   import { getDormitoryRecord } from '@/api/dormitory';
-  import DormitoryRecordForm from '@/views/dashboard/dormitory/dormitoryRecordForm.vue';
+  import DormitoryRecordForm from '@/views/dashboard/dormitory/record/form.vue';
 
   const { loading, setLoading } = useLoading(true);
   const tableData = ref<DormitoryRecordState[]>([]);
