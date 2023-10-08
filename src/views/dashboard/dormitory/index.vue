@@ -4,19 +4,19 @@
     <a-card class="general-card" title="宿舍管理">
       <a-tabs default-active-key="2" lazy-load>
         <a-tab-pane key="1" title="宿舍列表">
-          <DormitoryList />
+          <dormitory-list />
         </a-tab-pane>
         <a-tab-pane key="2" title="水电记录">
-          <DormitoryRecord />
+          <dormitory-record />
         </a-tab-pane>
         <a-tab-pane key="3" title="人员管理">
-          <DormitoryOccupancy />
+          <dormitory-occupancy />
         </a-tab-pane>
         <a-tab-pane key="4" title="宿舍费用">
-          Content of Tab Panel 4
+          <dormitory-expense />
         </a-tab-pane>
         <a-tab-pane key="5" title="人均分摊">
-          Content of Tab Panel 5
+          <dormitory-individual-expense />
         </a-tab-pane>
       </a-tabs>
     </a-card>
@@ -27,6 +27,8 @@
   import DormitoryRecord from '@/views/dashboard/dormitory/record/index.vue';
   import DormitoryList from '@/views/dashboard/dormitory/list/index.vue';
   import DormitoryOccupancy from '@/views/dashboard/dormitory/occupancy/index.vue';
+  import DormitoryExpense from '@/views/dashboard/dormitory/expense/index.vue';
+  import DormitoryIndividualExpense from '@/views/dashboard/dormitory/individual/index.vue';
 </script>
 
 <script lang="ts">

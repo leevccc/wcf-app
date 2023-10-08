@@ -38,6 +38,8 @@ export interface DormitoryExpenseState {
   id?: number;
   billMonth?: string;
   dormitoryId?: number;
+  address?: string;
+  roomNumber?: string;
   occupants?: number;
   lastMonthWaterReading?: number;
   currentMonthWaterReading?: number;
@@ -56,7 +58,10 @@ export interface DormitoryIndividualExpenseState {
   id?: number;
   billMonth?: string;
   dormitoryId?: number;
+  address?: string;
+  roomNumber?: string;
   userId?: number;
+  user?: string;
   checkInDate?: string;
   checkOutDate?: string;
   daysResided?: number;

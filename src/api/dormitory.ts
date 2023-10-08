@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {
+  DormitoryExpenseState,
+  DormitoryIndividualExpenseState,
   DormitoryOccupancyState,
   DormitoryRecordState,
   DormitoryState,
@@ -29,6 +31,10 @@ export interface DormitoryOccupancyForm {
   checkInDate?: string;
   checkOutDate?: string;
 }
+
+export interface DormitoryExpenseGenerateForm {
+  date?: string;
+}
 export function getDormitory() {
   return axios.get<DormitoryState[]>('/api/dormitories');
 }
@@ -38,6 +44,16 @@ export function getDormitoryRecord() {
 
 export function getDormitoryOccupancy() {
   return axios.get<DormitoryOccupancyState[]>('/api/dormitory/occupancy');
+}
+
+export function getDormitoryExpense() {
+  return axios.get<DormitoryExpenseState[]>('/api/dormitory/expense');
+}
+
+export function getDormitoryIndividualExpense() {
+  return axios.get<DormitoryIndividualExpenseState[]>(
+    '/api/dormitory/iExpense'
+  );
 }
 
 export function postDormitory(data: DormitoryForm) {
@@ -53,4 +69,8 @@ export function postDormitoryOccupancy(data: DormitoryOccupancyForm) {
 
 export function putDormitoryOccupancy(data: DormitoryOccupancyForm) {
   return axios.put(`/api/dormitory/occupancy/${data.id}`, data);
+}
+
+export function generateExpense(data: DormitoryExpenseGenerateForm) {
+  return axios.post('/api/dormitory/expense/generate', data);
 }
