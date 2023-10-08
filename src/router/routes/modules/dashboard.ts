@@ -40,6 +40,15 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'user',
+      name: '用户管理',
+      component: () => import('@/views/dashboard/user/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['admin'],
+      },
+    },
   ],
 };
 

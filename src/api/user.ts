@@ -10,6 +10,20 @@ export interface LoginData {
 export interface LoginRes {
   token: string;
 }
+
+export interface UserForm {
+  id?: number;
+  username?: string;
+  password?: string;
+  email?: string;
+  name?: string;
+  avatar?: string;
+  gender?: string;
+  address?: string;
+  idNumber?: string;
+  hireDate?: string;
+  resignationDate?: string;
+}
 export function login(data: LoginData) {
   return axios.post<LoginRes>('/api/auth/login', data);
 }
@@ -28,4 +42,12 @@ export function getUserList() {
 
 export function getMenuList() {
   return axios.get<RouteRecordNormalized[]>('/api/user/menu');
+}
+
+export function postUser(data: UserForm) {
+  return axios.post('/api/auth/register', data);
+}
+
+export function putUser(data: UserForm) {
+  return axios.put(`/api/users/${data.id}`, data);
 }
