@@ -88,7 +88,7 @@
       }
       emit('reload');
       Message.success({
-        content: '添加成功',
+        content: form.id !== undefined && form.id > 0 ? '更新成功' : '添加成功',
         resetOnHover: true,
       });
     } finally {

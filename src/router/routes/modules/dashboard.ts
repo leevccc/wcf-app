@@ -49,6 +49,15 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['admin'],
       },
     },
+    {
+      path: 'leave/record',
+      name: '请假记录',
+      component: () => import('@/views/dashboard/leave/record/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['admin'],
+      },
+    },
   ],
 };
 
