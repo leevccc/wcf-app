@@ -54,7 +54,7 @@
   import useChartOption from '@/hooks/chart-option';
   import { reactive, ref } from 'vue';
   import { getScrapWeekRecord, ScrapWeekRecordForm } from '@/api/scrap';
-  import { formatDate } from '@/utils/date';
+  import { diffDay, formatDate } from '@/utils/date';
 
   const form = reactive<ScrapWeekRecordForm>({
     from: undefined,
@@ -76,10 +76,17 @@
       weightData.value = [];
       packageData.value = [];
       const { data } = await getScrapWeekRecord(form);
+      let lastDay: string = data[0][0];
       data.forEach((_data: any) => {
+        if (diffDay(lastDay, _data[0]) >= 10) {
+          xAxis.value.push('隔');
+          weightData.value.push(0);
+          packageData.value.push(0);
+        }
         xAxis.value.push(formatDate(_data[0]));
         weightData.value.push(_data[1]);
         packageData.value.push(_data[2]);
+        lastDay = _data[0] as string;
       });
     } catch (error) {
       window.console.log(error);

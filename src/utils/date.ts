@@ -51,3 +51,21 @@ export function formatDate(time: any, chinese = false) {
   result += `${day}`;
   return result;
 }
+
+export function diffDay(day1: string, day2: string) {
+  // 假设 date1 和 date2 是两个日期对象
+  const date1 = new Date(day1);
+  const date2 = new Date(day2);
+
+  // 将日期转换为毫秒时间戳
+  const timestamp1 = date1.getTime();
+  const timestamp2 = date2.getTime();
+
+  // 计算时间差值（毫秒）
+  const timeDiff = timestamp2 - timestamp1;
+
+  // 将毫秒转换为天数
+  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  return daysDiff;
+}
