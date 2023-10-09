@@ -12,6 +12,11 @@ export interface ArchiveForm {
   unitPrice: number;
 }
 
+export interface ScrapWeekRecordForm {
+  from?: string;
+  end?: string;
+}
+
 export function getScrap(params: ScrapForm) {
   return axios.get<ScrapState[]>(`/api/scrap`, {
     params,
@@ -26,5 +31,11 @@ export function archiveScrap(data: ArchiveForm) {
 }
 
 export function getScrapStatistics() {
-  return axios.get('api/scrap/statistics');
+  return axios.get('/api/scrap/statistics');
+}
+
+export function getScrapWeekRecord(data: ScrapWeekRecordForm) {
+  return axios.get(
+    `/api/scrap/sum/byRecorded?from=${data.from}&end=${data.end}`
+  );
 }

@@ -17,6 +17,7 @@
             </a-upload>
             <a-button @click="archiveClick">归档并统计</a-button>
             <a-button @click="scrapStatisticsClick">统计结果</a-button>
+            <a-button @click="weekChartClick">每周数据</a-button>
           </a-space>
         </a-col>
       </a-row>
@@ -71,6 +72,7 @@
     </a-card>
     <ArchiveForm ref="archiveFormRef" @reload="fetchData"></ArchiveForm>
     <ScrapStatistics ref="scrapStatisticsRef"></ScrapStatistics>
+    <scrap-week-chart ref="scrapWeekChartRef" />
   </div>
 </template>
 
@@ -84,6 +86,7 @@
   import { Message } from '@arco-design/web-vue';
   import ArchiveForm from '@/views/dashboard/scrap/archiveForm.vue';
   import ScrapStatistics from '@/views/dashboard/scrap/scrapStatistics.vue';
+  import ScrapWeekChart from '@/views/dashboard/scrap/weekChart.vue';
 
   const { loading, setLoading } = useLoading(true);
   const tableData = ref<ScrapState[]>([]);
@@ -243,6 +246,11 @@
   const scrapStatisticsRef = ref<any>();
   const scrapStatisticsClick = () => {
     scrapStatisticsRef.value.initial();
+  };
+
+  const scrapWeekChartRef = ref<any>();
+  const weekChartClick = () => {
+    scrapWeekChartRef.value.initial();
   };
 </script>
 
