@@ -21,6 +21,8 @@ export interface UserState {
   idNumber?: string;
   hireDate?: string;
   resignationDate?: string;
+  departmentId?: number;
+  department?: string;
   role: RoleType;
   roles?: Array<RoleState>;
   createTime?: string;

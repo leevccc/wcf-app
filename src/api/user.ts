@@ -24,6 +24,12 @@ export interface UserForm {
   hireDate?: string;
   resignationDate?: string;
 }
+
+export interface UserDepartmentForm {
+  userId?: number;
+  user?: string;
+  departmentId?: number;
+}
 export function login(data: LoginData) {
   return axios.post<LoginRes>('/api/auth/login', data);
 }
@@ -50,4 +56,8 @@ export function postUser(data: UserForm) {
 
 export function putUser(data: UserForm) {
   return axios.put(`/api/users/${data.id}`, data);
+}
+
+export function updateDepartment(data: UserDepartmentForm) {
+  return axios.put(`api/users/${data.userId}/department`, data);
 }

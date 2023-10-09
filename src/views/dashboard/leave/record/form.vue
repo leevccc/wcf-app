@@ -94,12 +94,14 @@
       form.startDate = undefined;
       form.endDate = undefined;
       form.reason = undefined;
+      title.value = '添加请假记录';
     } else {
       form.id = record.id;
       form.userId = record.userId;
       form.startDate = record.startDate;
       form.endDate = record.endDate;
       form.reason = record.reason;
+      title.value = '编辑请假记录';
     }
     fetchUserList();
     visible.value = true;

@@ -55,7 +55,16 @@ const DASHBOARD: AppRouteRecordRaw = {
       component: () => import('@/views/dashboard/leave/record/index.vue'),
       meta: {
         requiresAuth: true,
-        roles: ['admin'],
+        roles: ['*'],
+      },
+    },
+    {
+      path: 'department',
+      name: '部门管理',
+      component: () => import('@/views/dashboard/department/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['*'],
       },
     },
   ],

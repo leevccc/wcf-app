@@ -22,6 +22,8 @@ const useUserStore = defineStore('user', {
     idNumber: undefined,
     hireDate: undefined,
     resignationDate: undefined,
+    departmentId: undefined,
+    department: undefined,
     role: '',
     roles: [],
     createTime: undefined,
