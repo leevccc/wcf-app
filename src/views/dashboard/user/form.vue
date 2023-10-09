@@ -10,13 +10,13 @@
       <a-form-item field="username" label="用户名">
         <a-input
           v-model="form.username"
-          :disabled="form.id > 0"
+          :disabled="form.id !== undefined && form.id > 0"
           placeholder="!!!创建后无法修改"
         />
       </a-form-item>
       <a-form-item field="password" label="密码">
         <a-input-password
-          v-if="form.id > 0"
+          v-if="form.id !== undefined && form.id > 0"
           v-model="form.password"
           placeholder="如果不修改请留空"
           allow-clear
