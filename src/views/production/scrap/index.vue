@@ -84,9 +84,9 @@
   import { formatDate } from '@/utils/date';
   import { getToken } from '@/utils/auth';
   import { Message } from '@arco-design/web-vue';
-  import ArchiveForm from '@/views/dashboard/scrap/archiveForm.vue';
-  import ScrapStatistics from '@/views/dashboard/scrap/scrapStatistics.vue';
-  import ScrapWeekChart from '@/views/dashboard/scrap/weekChart.vue';
+  import ArchiveForm from '@/views/production/scrap/archiveForm.vue';
+  import ScrapStatistics from '@/views/production/scrap/scrapStatistics.vue';
+  import ScrapWeekChart from '@/views/production/scrap/weekChart.vue';
 
   const { loading, setLoading } = useLoading(true);
   const tableData = ref<ScrapState[]>([]);

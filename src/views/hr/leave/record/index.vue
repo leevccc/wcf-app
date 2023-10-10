@@ -63,7 +63,7 @@
   import { LeaveRecordState } from '@/store/modules/leave/types';
   import { ref } from 'vue';
   import { getLeaveRecord } from '@/api/leave';
-  import LeaveRecordForm from '@/views/dashboard/leave/record/form.vue';
+  import LeaveRecordForm from '@/views/hr/leave/record/form.vue';
 
   const { loading, setLoading } = useLoading(false);
   const tableData = ref<LeaveRecordState[]>([]);

@@ -68,7 +68,7 @@
   import { DormitoryExpenseState } from '@/store/modules/dormitory/types';
   import { formatDate } from '@/utils/date';
   import { getDormitoryExpense } from '@/api/dormitory';
-  import DormitoryExpenseForm from '@/views/dashboard/dormitory/expense/form.vue';
+  import DormitoryExpenseForm from '@/views/hr/dormitory/expense/form.vue';
 
   const { loading, setLoading } = useLoading(false);
   const tableData = ref<DormitoryExpenseState[]>([]);

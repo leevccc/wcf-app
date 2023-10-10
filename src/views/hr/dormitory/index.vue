@@ -24,11 +24,11 @@
 </template>
 
 <script lang="ts" setup>
-  import DormitoryRecord from '@/views/dashboard/dormitory/record/index.vue';
-  import DormitoryList from '@/views/dashboard/dormitory/list/index.vue';
-  import DormitoryOccupancy from '@/views/dashboard/dormitory/occupancy/index.vue';
-  import DormitoryExpense from '@/views/dashboard/dormitory/expense/index.vue';
-  import DormitoryIndividualExpense from '@/views/dashboard/dormitory/individual/index.vue';
+  import DormitoryRecord from '@/views/hr/dormitory/record/index.vue';
+  import DormitoryList from '@/views/hr/dormitory/list/index.vue';
+  import DormitoryOccupancy from '@/views/hr/dormitory/occupancy/index.vue';
+  import DormitoryExpense from '@/views/hr/dormitory/expense/index.vue';
+  import DormitoryIndividualExpense from '@/views/hr/dormitory/individual/index.vue';
 </script>
 
 <script lang="ts">

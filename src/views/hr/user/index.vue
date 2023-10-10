@@ -71,8 +71,8 @@
   import { ref } from 'vue';
   import { getUserList } from '@/api/user';
   import { formatDate } from '@/utils/date';
-  import UserForm from '@/views/dashboard/user/form.vue';
-  import UserDepartmentForm from '@/views/dashboard/user/userDepartmentForm.vue';
+  import UserForm from '@/views/hr/user/form.vue';
+  import UserDepartmentForm from '@/views/hr/user/userDepartmentForm.vue';
 
   const { loading, setLoading } = useLoading(false);
   const tableData = ref<UserState[]>([]);

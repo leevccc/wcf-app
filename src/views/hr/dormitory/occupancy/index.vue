@@ -68,8 +68,8 @@
   import useLoading from '@/hooks/loading';
   import { formatDate } from '@/utils/date';
   import { getDormitoryOccupancy } from '@/api/dormitory';
-  import DormitoryOccupancyForm from '@/views/dashboard/dormitory/occupancy/form.vue';
-  import DOccupancyCheckOutForm from '@/views/dashboard/dormitory/occupancy/checkOutForm.vue';
+  import DormitoryOccupancyForm from '@/views/hr/dormitory/occupancy/form.vue';
+  import DOccupancyCheckOutForm from '@/views/hr/dormitory/occupancy/checkOutForm.vue';
   import { isEmptyString } from '@/utils/string';
 
   const { loading, setLoading } = useLoading(true);

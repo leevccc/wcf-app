@@ -129,7 +129,7 @@
     getOldLaborCost,
   } from '@/api/labor';
   import { formatDate } from '@/utils/date';
-  import LaborCostForm from '@/views/dashboard/labor/cost/form.vue';
+  import LaborCostForm from '@/views/production/labor/cost/form.vue';
   import { Message } from '@arco-design/web-vue';
   import { getToken } from '@/utils/auth';
 

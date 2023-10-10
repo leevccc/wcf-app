@@ -49,7 +49,7 @@
   import { ref } from 'vue';
   import { DepartmentState } from '@/store/modules/department/type';
   import { getDepartment } from '@/api/department';
-  import DepartmentForm from '@/views/dashboard/department/form.vue';
+  import DepartmentForm from '@/views/hr/department/form.vue';
 
   const { loading, setLoading } = useLoading(false);
   const tableData = ref<DepartmentState[]>([]);

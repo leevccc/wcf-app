@@ -3,7 +3,7 @@
     <a-row style="margin-bottom: 16px">
       <a-col :span="12">
         <a-space>
-          <a-button type="primary" @click="newDormitoryClick">新建</a-button>
+          <a-button type="primary" @click="newDataClick">新建</a-button>
         </a-space>
       </a-col>
     </a-row>
@@ -20,59 +20,57 @@
           data-index="id"
           :width="100"
         ></a-table-column>
-        <a-table-column title="地址" data-index="address"></a-table-column>
         <a-table-column
           title="宿舍"
-          data-index="roomNumber"
+          data-index="dormitory"
           :width="100"
         ></a-table-column>
+        <a-table-column title="采集日期" data-index="date" :width="120">
+          <template #cell="{ record }">
+            {{ formatDate(record.date) }}
+          </template>
+        </a-table-column>
+        <a-table-column title="账单日期" data-index="billDate" :width="120">
+          <template #cell="{ record }">
+            {{ formatDate(record.billDate) }}
+          </template>
+        </a-table-column>
         <a-table-column
-          title="水价"
-          data-index="waterPrice"
-          :width="100"
-        ></a-table-column>
-        <a-table-column
-          title="电价"
-          data-index="electricityPrice"
-          :width="100"
-        ></a-table-column>
-        <a-table-column
-          title="租赁日期"
-          data-index="leaseStartDate"
+          title="读数: 水"
+          data-index="water"
           :width="120"
-        >
-          <template #cell="{ record }">
-            {{ formatDate(record.leaseStartDate) }}
-          </template>
-        </a-table-column>
-        <a-table-column title="终止日期" data-index="leaseEndDate" :width="120">
-          <template #cell="{ record }">
-            {{ formatDate(record.leaseEndDate) }}
-          </template>
-        </a-table-column>
+        ></a-table-column>
+        <a-table-column
+          title="读数: 电"
+          data-index="electricity"
+          :width="120"
+        ></a-table-column>
         <a-table-column title="操作"></a-table-column>
       </template>
     </a-table>
   </div>
-  <DormitoryForm ref="dormitoryFormRef" @reload="fetchData"></DormitoryForm>
+  <DormitoryRecordForm
+    ref="dormitoryRecordFormRef"
+    @reload="fetchData"
+  ></DormitoryRecordForm>
 </template>
 
 <script lang="ts" setup>
   import useLoading from '@/hooks/loading';
   import { formatDate } from '@/utils/date';
   import { ref } from 'vue';
-  import { DormitoryState } from '@/store/modules/dormitory/types';
-  import { getDormitory } from '@/api/dormitory';
-  import DormitoryForm from '@/views/dashboard/dormitory/list/form.vue';
+  import { DormitoryRecordState } from '@/store/modules/dormitory/types';
+  import { getDormitoryRecord } from '@/api/dormitory';
+  import DormitoryRecordForm from '@/views/hr/dormitory/record/form.vue';
 
   const { loading, setLoading } = useLoading(true);
-  const tableData = ref<DormitoryState[]>([]);
+  const tableData = ref<DormitoryRecordState[]>([]);
   setLoading(false);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { data } = await getDormitory();
+      const { data } = await getDormitoryRecord();
       tableData.value = data;
     } catch (err) {
       window.console.log(err);
@@ -82,15 +80,15 @@
   };
   fetchData();
 
-  const dormitoryFormRef = ref<any>();
-  const newDormitoryClick = () => {
-    dormitoryFormRef.value.initial();
+  const dormitoryRecordFormRef = ref<any>();
+  const newDataClick = () => {
+    dormitoryRecordFormRef.value.initial();
   };
 </script>
 
 <script lang="ts">
   export default {
-    name: 'DormitoryList',
+    name: 'DormitoryRecord',
   };
 </script>
 
