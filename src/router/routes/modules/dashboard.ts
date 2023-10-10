@@ -67,6 +67,15 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'labor/cost',
+      name: '计件价格',
+      component: () => import('@/views/dashboard/labor/cost/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 
