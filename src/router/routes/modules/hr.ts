@@ -21,15 +21,6 @@ const HR: AppRouteRecordRaw = {
       },
     },
     {
-      path: 'leave/record',
-      name: '请假记录',
-      component: () => import('@/views/hr/leave/record/index.vue'),
-      meta: {
-        requiresAuth: true,
-        roles: ['*'],
-      },
-    },
-    {
       path: 'dormitory',
       name: '宿舍管理',
       component: () => import('@/views/hr/dormitory/index.vue'),
@@ -42,6 +33,24 @@ const HR: AppRouteRecordRaw = {
       path: 'department',
       name: '部门管理',
       component: () => import('@/views/hr/department/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
+    {
+      path: 'leave/record',
+      name: '请假记录',
+      component: () => import('@/views/hr/leave/record/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
+    {
+      path: 'loan/record',
+      name: '借款管理',
+      component: () => import('@/views/hr/loan/record/index.vue'),
       meta: {
         requiresAuth: true,
         roles: ['*'],
