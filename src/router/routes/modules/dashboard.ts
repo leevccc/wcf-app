@@ -76,6 +76,15 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'labor/data',
+      name: '计件数据',
+      component: () => import('@/views/dashboard/labor/data/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 

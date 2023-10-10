@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { LaborCostState } from '@/store/modules/labor/cost/type';
+import { LaborDataState } from '@/store/modules/labor/data/type';
 
 export interface LaborCostForm {
   departmentId?: number;
@@ -30,4 +31,34 @@ export function postLaborCost(data: LaborCostForm) {
 
 export function deleteLaborCost(id: number) {
   return axios.delete(`/api/labor/cost/${id}`);
+}
+
+export interface LaborDataForm {
+  id?: number;
+  orderId?: number;
+  productId?: number;
+  productName?: string;
+  date?: string;
+  laborCostId?: number;
+  departmentId?: number;
+  department?: string;
+  action?: string;
+  quantity?: number;
+  frequency?: number;
+  unitPrice?: number;
+  amount?: number;
+  notes?: string;
+  userId?: number;
+  producer?: string;
+  cardGroup?: string;
+  cardNumber?: string;
+  archiveDate?: string;
+}
+
+export function getLaborData() {
+  return axios.get<LaborDataState[]>('/api/labor/data');
+}
+
+export function getAllLaborData() {
+  return axios.get<LaborDataState[]>('/api/labor/data/all');
 }
