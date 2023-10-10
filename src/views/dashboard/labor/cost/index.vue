@@ -8,7 +8,16 @@
             <a-button type="primary" status="success" @click="newDataClick">
               添加
             </a-button>
-            <a-button type="primary" status="success" disabled>导入</a-button>
+            <a-upload
+              accept=".xlsx"
+              :custom-request="customRequest"
+              :show-upload-list="false"
+              :show-file-list="false"
+            >
+              <template #upload-button>
+                <a-button type="primary" status="success">导入</a-button>
+              </template>
+            </a-upload>
             <a-button
               type="primary"
               :disabled="curQuery === 'all'"
@@ -68,7 +77,7 @@
             :width="120"
           ></a-table-column>
           <a-table-column
-            title="单价"
+            title="价格"
             align="center"
             data-index="price"
             :width="120"
@@ -121,6 +130,8 @@
   } from '@/api/labor';
   import { formatDate } from '@/utils/date';
   import LaborCostForm from '@/views/dashboard/labor/cost/form.vue';
+  import { Message } from '@arco-design/web-vue';
+  import { getToken } from '@/utils/auth';
 
   const { loading, setLoading } = useLoading(false);
   const tableData = ref<LaborCostState[]>([]);
@@ -200,6 +211,77 @@
     } finally {
       setLoading(false);
     }
+  };
+
+  const customRequest = (option: {
+    onProgress: any;
+    onError: any;
+    onSuccess: any;
+    fileItem: any;
+    name?: any;
+  }) => {
+    const { onProgress, onError, onSuccess, fileItem, name } = option;
+
+    const isXLSX =
+      fileItem.file.type ===
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    if (!isXLSX) {
+      Message.error('只能上传 xlsx 文件');
+      onError('只能上传 xlsx 文件');
+      return {
+        abort() {
+          xhr.abort();
+        },
+      };
+    }
+
+    const xhr = new XMLHttpRequest();
+    if (xhr.upload) {
+      xhr.upload.onprogress = (event) => {
+        let percent;
+        if (event.total > 0) {
+          // 0 ~ 1
+          percent = event.loaded / event.total;
+        }
+        onProgress(percent, event);
+      };
+    }
+
+    xhr.onerror = function error(e) {
+      onError(e);
+    };
+
+    // eslint-disable-next-line consistent-return
+    xhr.onload = function onload() {
+      if (xhr.status < 200 || xhr.status >= 300) {
+        return onError(xhr.responseText);
+      }
+      const res = JSON.parse(xhr.response);
+      if (res.code !== '200') {
+        Message.error(res.message);
+      } else {
+        Message.success('上传成功。');
+        fetchData(curQuery.value);
+      }
+
+      onSuccess(xhr.response);
+    };
+
+    const formData = new FormData();
+    formData.append(name || 'file', fileItem.file);
+    xhr.open(
+      'post',
+      `${import.meta.env.VITE_API_BASE_URL}/api/labor/cost/excel`,
+      true
+    );
+    xhr.setRequestHeader('Authorization', `Bearer ${getToken()}`);
+    xhr.send(formData);
+
+    return {
+      abort() {
+        xhr.abort();
+      },
+    };
   };
 </script>
 
