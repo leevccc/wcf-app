@@ -74,7 +74,7 @@
             title="动作"
             align="center"
             data-index="action"
-            :width="120"
+            :width="140"
           ></a-table-column>
           <a-table-column
             title="价格"

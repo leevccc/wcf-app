@@ -30,16 +30,19 @@
             title="ID"
             data-index="id"
             align="center"
+            :width="100"
           ></a-table-column>
           <a-table-column
             title="订单ID"
             data-index="orderId"
             align="center"
+            :width="100"
           ></a-table-column>
           <a-table-column
             title="产品"
             data-index="product"
             align="center"
+            :width="120"
           ></a-table-column>
           <a-table-column title="日期" :width="120" align="center">
             <template #cell="{ record }">
@@ -50,46 +53,55 @@
             title="部门"
             data-index="department"
             align="center"
+            :width="80"
           ></a-table-column>
           <a-table-column
             title="动作"
             data-index="action"
             align="center"
+            :width="140"
           ></a-table-column>
           <a-table-column
             title="数量"
             data-index="quantity"
             align="center"
+            :width="100"
           ></a-table-column>
           <a-table-column
             title="步骤"
             data-index="frequency"
             align="center"
+            :width="60"
           ></a-table-column>
           <a-table-column
             title="单价"
             data-index="unitPrice"
             align="center"
+            :width="100"
           ></a-table-column>
           <a-table-column
             title="金额"
             data-index="amount"
             align="center"
+            :width="100"
           ></a-table-column>
           <a-table-column
             title="生产者"
             data-index="producer"
             align="center"
+            :width="100"
           ></a-table-column>
           <a-table-column
             title="卡片"
             data-index="cardGroup"
             align="center"
+            :width="100"
           ></a-table-column>
           <a-table-column
             title="编号"
             data-index="cardNumber"
             align="center"
+            :width="60"
           ></a-table-column>
           <a-table-column title="备注" data-index="notes"></a-table-column>
           <a-table-column title="操作"> </a-table-column>
