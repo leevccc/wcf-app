@@ -47,7 +47,7 @@
             data-index="paymentMethod"
             :width="120"
           ></a-table-column>
-          <a-table-column title="已处理" :width="80">
+          <a-table-column title="已入账" :width="80">
             <template #cell="{ record }">
               {{ record.isProcessed ? '是' : '否' }}
             </template>
@@ -58,10 +58,10 @@
               <a-popconfirm
                 v-if="!record.isProcessed"
                 :ok-loading="loading"
-                content="更新借款记录为已处理?"
+                content="手动更新借款记录为已入账?（生成工资时会查找未入账的借款，自动扣除相应工资并更新借款记录为已入账）"
                 @ok="processedClick(record.id)"
               >
-                <a-button type="text" size="mini">处理</a-button>
+                <a-button type="text" size="mini">入账</a-button>
               </a-popconfirm>
               <a-popconfirm
                 v-if="!record.isProcessed"
