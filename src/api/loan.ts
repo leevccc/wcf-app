@@ -9,7 +9,8 @@ export interface LoanRecordForm {
   purpose?: string;
   paymentDate?: string;
   paymentMethod?: string;
-  isProcessed?: boolean;
+  paid?: boolean;
+  posted?: boolean;
   notes?: string;
 }
 
@@ -21,8 +22,8 @@ export function postLoanRecord(data: LoanRecordForm) {
   return axios.post('/api/loan/record', data);
 }
 
-export function processedLoanRecord(id: number) {
-  return axios.put(`/api/loan/record/${id}`, { isProcessed: true });
+export function setPaid(id: number) {
+  return axios.put(`/api/loan/record/${id}`, { paid: true });
 }
 
 export function putLoanRecord(data: LoanRecordForm) {

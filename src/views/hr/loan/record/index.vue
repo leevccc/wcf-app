@@ -47,24 +47,34 @@
             data-index="paymentMethod"
             :width="120"
           ></a-table-column>
-          <a-table-column title="已入账" :width="80">
+          <a-table-column title="已支付" :width="80">
             <template #cell="{ record }">
-              {{ record.isProcessed ? '是' : '否' }}
+              {{ record.paid ? '是' : '否' }}
             </template>
           </a-table-column>
+          <a-table-column title="已入账" :width="80">
+            <template #cell="{ record }">
+              {{ record.posted ? '是' : '否' }}
+            </template>
+          </a-table-column>
+          <a-table-column
+            title="制单人"
+            data-index="creator"
+            :width="100"
+          ></a-table-column>
           <a-table-column title="备注" data-index="notes"></a-table-column>
           <a-table-column title="操作">
             <template #cell="{ record }">
               <a-popconfirm
-                v-if="!record.isProcessed"
+                v-if="!record.paid"
                 :ok-loading="loading"
-                content="手动更新借款记录为已入账?（生成工资时会查找未入账的借款，自动扣除相应工资并更新借款记录为已入账）"
-                @ok="processedClick(record.id)"
+                content="更新借款记录为已支付?"
+                @ok="paidClick(record.id)"
               >
-                <a-button type="text" size="mini">入账</a-button>
+                <a-button type="text" size="mini">已支付</a-button>
               </a-popconfirm>
               <a-popconfirm
-                v-if="!record.isProcessed"
+                v-if="!record.paid && !record.posted"
                 :ok-loading="loading"
                 content="确定要删除借款记录吗?"
                 @ok="deleteClick(record.id)"
@@ -84,11 +94,7 @@
   import useLoading from '@/hooks/loading';
   import { ref } from 'vue';
   import { LoanRecordState } from '@/store/modules/loan/type';
-  import {
-    deleteLoadRecord,
-    getLoanRecord,
-    processedLoanRecord,
-  } from '@/api/loan';
+  import { deleteLoadRecord, getLoanRecord, setPaid } from '@/api/loan';
   import { formatDate } from '@/utils/date';
   import LoanRecordForm from '@/views/hr/loan/record/form.vue';
 
@@ -112,10 +118,10 @@
   const newDataClick = () => {
     loanRecordFormRef.value.initial();
   };
-  const processedClick = async (id: number) => {
+  const paidClick = async (id: number) => {
     setLoading(true);
     try {
-      await processedLoanRecord(id);
+      await setPaid(id);
       await fetchData();
     } catch (error) {
       window.console.log(error);

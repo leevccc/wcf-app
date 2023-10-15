@@ -6,6 +6,11 @@ export interface LoanRecordState {
   purpose?: string;
   paymentDate?: string;
   paymentMethod?: string;
-  isProcessed?: boolean;
+  paid?: boolean;
+  posted?: boolean;
+  creatorId?: number;
+  creator?: string;
   notes?: string;
+  createTime?: string;
+  updateTime?: string;
 }

@@ -94,7 +94,8 @@
       form.purpose = undefined;
       form.paymentDate = formatDate(new Date());
       form.paymentMethod = undefined;
-      form.isProcessed = undefined;
+      form.paid = undefined;
+      form.posted = undefined;
       form.notes = undefined;
       title.value = '添加借款记录';
     } else {
@@ -104,7 +105,8 @@
       form.purpose = record.purpose;
       form.paymentDate = record.paymentDate;
       form.paymentMethod = record.paymentMethod;
-      form.isProcessed = record.isProcessed;
+      form.paid = record.paid;
+      form.posted = record.posted;
       form.notes = record.notes;
       title.value = '编辑借款记录';
     }
