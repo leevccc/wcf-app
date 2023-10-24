@@ -35,7 +35,7 @@ export function login(data: LoginData) {
 }
 
 export function logout() {
-  return axios.post<LoginRes>('/api/auth/logout');
+  return axios.delete<LoginRes>('/api/auth/logout');
 }
 
 export function getUserInfo() {
