@@ -21,6 +21,15 @@ const HR: AppRouteRecordRaw = {
       },
     },
     {
+      path: 'salary',
+      name: '工资管理',
+      component: () => import('@/views/hr/salary/index.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
+    {
       path: 'dormitory',
       name: '宿舍管理',
       component: () => import('@/views/hr/dormitory/index.vue'),
