@@ -12,8 +12,8 @@
         <a-table-column title="员工" data-index="user" :width="100" />
         <a-table-column title="数据" data-index="count" :width="100" />
         <a-table-column title="操作">
-          <template #cell="record">
-            <a-button type="text" size="mini" @click="showDetails(record)">
+          <template #cell="{ record }">
+            <a-button type="text" size="mini" @click="showDetailsClick(record)">
               详情
             </a-button>
           </template>
@@ -21,16 +21,18 @@
       </template>
     </a-table>
   </div>
+  <salary-details ref="salaryDetailsRef" @reload="fetchData" />
 </template>
 
 <script lang="ts" setup>
   import useLoading from '@/hooks/loading';
   import { ref } from 'vue';
-  import { SalaryConfigStates } from '@/store/modules/salary/types';
+  import { SalaryConfigIndexState } from '@/store/modules/salary/types';
   import { getSalaryConfig } from '@/api/salary';
+  import SalaryDetails from '@/views/hr/salary/details/index.vue';
 
   const { loading, setLoading } = useLoading(false);
-  const tableData = ref<SalaryConfigStates[]>([]);
+  const tableData = ref<SalaryConfigIndexState[]>([]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -46,8 +48,9 @@
 
   fetchData();
 
-  const showDetails = (data: SalaryConfigStates) => {
-    window.console.log(data);
+  const salaryDetailsRef = ref<any>();
+  const showDetailsClick = (data: SalaryConfigIndexState) => {
+    salaryDetailsRef.value.initial(data);
   };
 </script>
 
