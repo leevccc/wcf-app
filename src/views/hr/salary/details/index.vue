@@ -195,7 +195,11 @@
     SalaryConfigIndexState,
     SalaryConfigState,
   } from '@/store/modules/salary/types';
-  import { getUserSalaryConfig, postUserSalaryConfig } from '@/api/salary';
+  import {
+    getUserSalaryConfig,
+    postUserSalaryConfig,
+    putUserSalaryConfig,
+  } from '@/api/salary';
   import { Message } from '@arco-design/web-vue';
 
   const visible = ref(false);
@@ -231,7 +235,10 @@
   };
 
   const insertClick = () => {
-    if (tableData[tableData.length - 1].id === undefined) {
+    if (
+      tableData.length > 0 &&
+      tableData[tableData.length - 1].id === undefined
+    ) {
       Message.error('请先保存新的数据');
       return;
     }
@@ -271,7 +278,8 @@
   const saveClick = async (data: SalaryConfigState) => {
     setLoading(true);
     try {
-      await postUserSalaryConfig(data);
+      if (data.id === undefined) await postUserSalaryConfig(data);
+      else await putUserSalaryConfig(data);
       await fetchData(currentUserId.value);
     } catch (error) {
       window.console.log(error);

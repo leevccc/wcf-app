@@ -52,6 +52,26 @@ export function formatDate(time: any, chinese = false) {
   return result;
 }
 
+export function getFormatYearAndMonth(time: any, chinese = false) {
+  if (time == null || time === '') return time;
+  time = new Date(time);
+
+  const year = time.getFullYear();
+  const month = time.getMonth() + 1;
+
+  if (chinese) {
+    let result = `${year}年`;
+    if (month < 10) result += '\u00A0\u00A0';
+    result = `${result + month}月`;
+    return result;
+  }
+
+  let result = `${year}-`;
+  if (month < 10) result += '0';
+  result += `${month}`;
+  return result;
+}
+
 export function diffDay(day1: string, day2: string) {
   // 假设 date1 和 date2 是两个日期对象
   const date1 = new Date(day1);

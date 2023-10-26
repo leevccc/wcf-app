@@ -22,3 +22,21 @@ export interface SalaryConfigState {
   effectiveDate?: string;
   notes?: string;
 }
+
+export interface SalarySummaryState {
+  id?: number;
+  billDate?: string;
+  userId?: number;
+  user?: string;
+  paymentMethod?: string;
+  accountNumber?: string;
+  laborDays?: number;
+  baseSalary?: number;
+  pieceSalary?: number;
+  allowance?: number;
+  deduction?: number;
+  amount?: number;
+  paid?: number;
+  finish?: boolean;
+  notes?: string;
+}
