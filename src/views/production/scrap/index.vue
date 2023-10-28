@@ -179,6 +179,8 @@
       };
     }
 
+    setLoading(true);
+
     const xhr = new XMLHttpRequest();
     if (xhr.upload) {
       xhr.upload.onprogress = (event) => {
@@ -198,11 +200,13 @@
     // eslint-disable-next-line consistent-return
     xhr.onload = function onload() {
       if (xhr.status < 200 || xhr.status >= 300) {
+        setLoading(false);
         return onError(xhr.responseText);
       }
       const res = JSON.parse(xhr.response);
       if (res.code !== '200') {
         Message.error(res.message);
+        setLoading(false);
       } else {
         Message.success('上传成功。');
         fetchData();
@@ -219,6 +223,7 @@
 
     return {
       abort() {
+        setLoading(false);
         xhr.abort();
       },
     };
