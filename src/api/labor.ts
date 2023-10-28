@@ -59,6 +59,10 @@ export function getLaborData() {
   return axios.get<LaborDataState[]>('/api/labor/data');
 }
 
+export function putLaborData(data: LaborDataForm) {
+  return axios.put<LaborDataState>(`/api/labor/data/${data.id}`, data);
+}
+
 export function getAllLaborData() {
   return axios.get<LaborDataState[]>('/api/labor/data/all');
 }

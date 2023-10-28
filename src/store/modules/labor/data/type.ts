@@ -18,4 +18,5 @@ export interface LaborDataState {
   cardGroup?: string;
   cardNumber?: string;
   archiveDate?: string;
+  updated?: boolean;
 }

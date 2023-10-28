@@ -40,7 +40,7 @@
           ></a-table-column>
           <a-table-column
             title="产品"
-            data-index="product"
+            data-index="productName"
             align="center"
             :width="120"
           ></a-table-column>
@@ -104,24 +104,33 @@
             :width="60"
           ></a-table-column>
           <a-table-column title="备注" data-index="notes"></a-table-column>
-          <a-table-column title="操作"> </a-table-column>
+          <a-table-column title="操作">
+            <template #cell="{ record }">
+              <a-button type="text" size="mini" @click="editClick(record)">
+                编辑
+              </a-button>
+              <a-tag v-if="record.updated" color="grey"> 已更新 </a-tag>
+            </template>
+          </a-table-column>
         </template>
       </a-table>
     </a-card>
+    <labor-data-form ref="laborDataFormRef" @reload="updateData" />
   </div>
 </template>
 
 <script lang="ts" setup>
   import useLoading from '@/hooks/loading';
   import { ref } from 'vue';
-  import { LaborCostState } from '@/store/modules/labor/cost/type';
   import { getLaborData } from '@/api/labor';
   import { formatDate } from '@/utils/date';
   import { Message } from '@arco-design/web-vue';
   import { getToken } from '@/utils/auth';
+  import LaborDataForm from '@/views/production/labor/data/form.vue';
+  import { LaborDataState } from '@/store/modules/labor/data/type';
 
   const { loading, setLoading } = useLoading(false);
-  const tableData = ref<LaborCostState[]>([]);
+  const tableData = ref<LaborDataState[]>([]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -205,6 +214,40 @@
         xhr.abort();
       },
     };
+  };
+
+  const laborDataFormRef = ref<any>();
+  const editClick = (data: LaborDataState) => {
+    laborDataFormRef.value.initial(data);
+  };
+
+  const updateData = (data: LaborDataState) => {
+    tableData.value.forEach((_data) => {
+      if (_data.id === data.id) copyData(_data, data);
+    });
+  };
+
+  const copyData = (oldData: LaborDataState, newData: LaborDataState) => {
+    oldData.id = newData.id;
+    oldData.orderId = newData.orderId;
+    oldData.productId = newData.productId;
+    oldData.productName = newData.productName;
+    oldData.date = newData.date;
+    oldData.laborCostId = newData.laborCostId;
+    oldData.departmentId = newData.departmentId;
+    oldData.department = newData.department;
+    oldData.action = newData.action;
+    oldData.quantity = newData.quantity;
+    oldData.frequency = newData.frequency;
+    oldData.unitPrice = newData.unitPrice;
+    oldData.amount = newData.amount;
+    oldData.notes = newData.notes;
+    oldData.userId = newData.userId;
+    oldData.producer = newData.producer;
+    oldData.cardGroup = newData.cardGroup;
+    oldData.cardNumber = newData.cardNumber;
+    oldData.archiveDate = newData.archiveDate;
+    oldData.updated = true;
   };
 </script>
 
