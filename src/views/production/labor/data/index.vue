@@ -15,6 +15,7 @@
                 <a-button type="primary" status="success">导入</a-button>
               </template>
             </a-upload>
+            <a-button type="primary" @click="exportClick"> 导出 </a-button>
           </a-space>
         </a-col>
       </a-row>
@@ -122,7 +123,7 @@
 <script lang="ts" setup>
   import useLoading from '@/hooks/loading';
   import { ref } from 'vue';
-  import { getLaborData } from '@/api/labor';
+  import { exportLaborData, getLaborData } from '@/api/labor';
   import { formatDate } from '@/utils/date';
   import { Message } from '@arco-design/web-vue';
   import { getToken } from '@/utils/auth';
@@ -248,6 +249,14 @@
     oldData.cardNumber = newData.cardNumber;
     oldData.archiveDate = newData.archiveDate;
     oldData.updated = true;
+  };
+
+  const exportClick = async () => {
+    try {
+      await exportLaborData();
+    } catch (error) {
+      window.console.log(error);
+    }
   };
 </script>
 

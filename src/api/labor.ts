@@ -66,3 +66,22 @@ export function putLaborData(data: LaborDataForm) {
 export function getAllLaborData() {
   return axios.get<LaborDataState[]>('/api/labor/data/all');
 }
+
+export function exportLaborData() {
+  return axios
+    .get('/api/labor/data/export')
+    .then((response) => {
+      const url = `${import.meta.env.VITE_API_BASE_URL}${response.data}`;
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'example.xlsx';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+      // 处理下载失败的情况
+      window.console.error('下载失败', error);
+    });
+}
