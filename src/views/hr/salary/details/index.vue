@@ -86,7 +86,7 @@
               v-if="record.insertMode"
               v-model="record.isDailyConversion"
               type="round"
-              size="mini"
+              size="small"
             />
             <a-tag
               v-if="!record.insertMode && record.isDailyConversion"
@@ -108,7 +108,7 @@
               v-if="record.insertMode"
               v-model="record.isRealTime"
               type="round"
-              size="mini"
+              size="small"
             />
             <a-tag v-if="!record.insertMode && record.isRealTime" color="green">
               是
